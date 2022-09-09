@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home.js";
 import Login from "./components/Login";
+import "./App.css";
 
 function App() {
   return (

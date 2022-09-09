@@ -74,6 +74,15 @@ function Home() {
 
   return (
     <div>
+      {/* <button
+          onClick={() =>
+            axios.get(process.env.REACT_APP_api + "/logout").then((res) => {
+              console.log(res.data);
+            })
+          }
+        >
+          logout
+        </button> */}
       <form onSubmit={handleSubmit}>
         <textarea
           name="newPost"
