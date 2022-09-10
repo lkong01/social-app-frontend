@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "../styles/Home.css";
+import Comment from "./Comment";
 
 function Home() {
   const [posts, setPosts] = useState([]);
-  const [newPost, setNewPost] = useState("What's happening?");
+  const [newPost, setNewPost] = useState("");
 
   const fetchPosts = async () => {
     const res = await axios.get("http://localhost:3000/posts/", {
       withCredentials: true,
     });
-
     console.log(res.data);
     setPosts(res.data);
   };
 
-  const handleSubmit = (e) => {
+  const handlePostSubmit = (e) => {
     e.preventDefault();
 
     axios({
@@ -35,12 +36,12 @@ function Home() {
       });
   };
 
-  const handleChange = (e) => {
+  const handlePostChange = (e) => {
     console.log(e.target.value);
     setNewPost(e.target.value);
   };
 
-  const handleDelete = (e) => {
+  const handlePostDelete = (e) => {
     console.log(e.target.value);
     axios
       .delete("http://localhost:3000/post/" + String(e.target.value))
@@ -73,41 +74,52 @@ function Home() {
   return (
     <div>
       <nav>
-        <a href="/home">Home</a>
-        <button
-          onClick={() =>
-            axios.get(process.env.REACT_APP_api + "/logout").then((res) => {
-              console.log(res.data);
-              window.location.href = "/login";
-            })
-          }
-        >
-          logout
-        </button>
+        <a href="/home">reactbook</a>
+        <div className="nav-main">
+          <a href="/home">Home</a>
+          <button
+            onClick={() =>
+              axios.get("http://localhost:3000" + "/logout").then((res) => {
+                console.log(res.data);
+                window.location.href = "/login";
+              })
+            }
+          >
+            logout
+          </button>
+        </div>
       </nav>
 
-      <form onSubmit={handleSubmit}>
-        <textarea
-          name="newPost"
-          id="newPost"
-          cols="30"
-          rows="5"
-          value={newPost}
-          onChange={handleChange}
-        />
-        <button type="submit">Post</button>
-      </form>
-      {posts.map((post) => {
-        return (
-          <div key={post._id}>
-            {post.text}
+      <div className="profile-main">
+        <div className="user-info">name</div>
+        <div className="posts">
+          <form onSubmit={handlePostSubmit}>
+            <textarea
+              name="newPost"
+              id="newPost"
+              cols="30"
+              rows="5"
+              value={newPost}
+              placeholder="What's happening?"
+              onChange={handlePostChange}
+              required
+            />
+            <button type="submit">Post</button>
+          </form>
+          {posts.map((post) => {
+            return (
+              <div className="post" key={post._id}>
+                {post.text}
 
-            <button value={post._id} onClick={handleDelete}>
-              Delete
-            </button>
-          </div>
-        );
-      })}
+                <button value={post._id} onClick={handlePostDelete}>
+                  x
+                </button>
+                <Comment postId={post._id}></Comment>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

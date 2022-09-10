@@ -1,0 +1,40 @@
+nav{
+    background-color: #1B74E4;
+    color:white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.nav-main{
+    display:flex;
+    gap:1rem;
+}
+
+nav a{
+    color:white;
+}
+
+nav button{
+    color: white;
+    font-size: 1rem;
+}
+
+/******************* body content **************/
+.profile-main{
+    display:flex;
+}
+
+.user-info{
+    flex:1;
+}
+
+.posts{
+    flex:2;
+}
+
+.post{
+    border: solid black 1px;
+    margin: 1rem;
+}
+
