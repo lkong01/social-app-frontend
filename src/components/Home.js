@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Home() {
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("What's happening?");
 
-  const fetchItems = async () => {
+  const fetchPosts = async () => {
     const res = await axios.get("http://localhost:3000/posts/", {
       withCredentials: true,
     });
+
     console.log(res.data);
     setPosts(res.data);
   };
@@ -31,6 +28,7 @@ function Home() {
       .then(function (response) {
         console.log(response);
         //window.location.reload();
+        fetchPosts();
       })
       .catch(function (error) {
         console.log(error);
@@ -45,12 +43,10 @@ function Home() {
   const handleDelete = (e) => {
     console.log(e.target.value);
     axios
-      .delete(
-        "http://localhost:3000/posts/post/" + String(e.target.value) + "/delete"
-      )
+      .delete("http://localhost:3000/post/" + String(e.target.value))
       .then(function (response) {
         console.log(response);
-        window.location.reload();
+        fetchPosts();
       })
       .catch(function (error) {
         console.log(error);
@@ -71,18 +67,25 @@ function Home() {
   //   //     console.log(error);
   //   //   });
   // };
-
+  useEffect(() => {
+    fetchPosts();
+  }, []);
   return (
     <div>
-      {/* <button
+      <nav>
+        <a href="/home">Home</a>
+        <button
           onClick={() =>
             axios.get(process.env.REACT_APP_api + "/logout").then((res) => {
               console.log(res.data);
+              window.location.href = "/login";
             })
           }
         >
           logout
-        </button> */}
+        </button>
+      </nav>
+
       <form onSubmit={handleSubmit}>
         <textarea
           name="newPost"
@@ -94,7 +97,7 @@ function Home() {
         />
         <button type="submit">Post</button>
       </form>
-      {/* {posts.map((post) => {
+      {posts.map((post) => {
         return (
           <div key={post._id}>
             {post.text}
@@ -104,7 +107,7 @@ function Home() {
             </button>
           </div>
         );
-      })}{" "} */}
+      })}
     </div>
   );
 }
