@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/Home.css";
 import Comment from "./Comment";
+import Like from "./Like";
 
-function Home() {
+function Home(props) {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
 
@@ -112,9 +113,10 @@ function Home() {
                 {post.text}
 
                 <button value={post._id} onClick={handlePostDelete}>
-                  x
+                  delete
                 </button>
                 <Comment postId={post._id}></Comment>
+                <Like postId={post._id}></Like>
               </div>
             );
           })}

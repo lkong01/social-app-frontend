@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Like from "./Like";
 import "../styles/Comment.css";
 
 function Comment(props) {
@@ -13,7 +14,7 @@ function Comment(props) {
         withCredentials: true,
       }
     );
-    console.log(res.data.comments);
+    //console.log(res.data.comments);
     setComments(res.data.comments);
   };
 

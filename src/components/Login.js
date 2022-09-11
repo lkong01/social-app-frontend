@@ -5,12 +5,13 @@ import "../styles/Login.css";
 import githubLogo from "../images/icons8-github.svg";
 import emailLogo from "../images/icons8-circled-envelope-50.png";
 
-function Login() {
+function Login(props) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [wrongLogin, setWrongLogin] = useState(false);
+  const [user, setUser] = useState("");
 
   function handleLogin(e) {
     e.preventDefault();
@@ -25,10 +26,13 @@ function Login() {
       withCredentials: true,
     })
       .then(function (response) {
-        console.log(response);
+        console.log(response.data);
         if (response.data == "Incorrect username or password.") {
           setWrongLogin(true);
+          console.log("Incorrect username or password.");
         } else {
+          setUser(response.data);
+
           setWrongLogin(false);
         }
         //window.location.reload();
@@ -37,7 +41,10 @@ function Login() {
         console.log(error);
       });
   }
+  // useEffect(() => {
+  //   localStorage.setItem("currentUser", user.username);
 
+  // }, [user]);
   return (
     <div className="login-page">
       <div className="login-main">
