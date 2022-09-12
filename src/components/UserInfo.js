@@ -1,20 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "../styles/UserInfo.css";
 
-function UserInfo() {
+function UserInfo(props) {
+  const [user, setUser] = useState({
+    firstName: "",
+    userProfileImg: "",
+    lastName: "",
+    friends: [],
+  });
   const [friends, setFriends] = useState([]);
   const [profileImg, setProfileImg] = useState();
 
   const fetchUser = async () => {
-    const res = await axios.get(
-      `http://localhost:3000/user/630fbed1269c22832d102c43/friends`,
-      {
-        withCredentials: true,
-      }
-    );
-    console.log(res.data.profileImg, "img address");
-    setFriends(res.data.friends);
-    setProfileImg(res.data.profileImg);
+    const res = await axios.get(`http://localhost:3000/user/${props.userId}`, {
+      withCredentials: true,
+    });
+    console.log(res.data.profileImg, "img address", res.data);
+    setUser(res.data);
+    // setFriends(res.data.friends);
+    // setProfileImg(res.data.profileImg);
   };
 
   useEffect(() => {
@@ -24,12 +29,15 @@ function UserInfo() {
   return (
     <div className="user-info">
       name
-      <img src={profileImg} alt="profile img" />
+      {user.firstName} {user.lastName}
+      <img src={user.profileImg} alt="profile-img" />
       <div className="friends">
-        {friends.map((friend) => {
+        friends:
+        {user.friends.map((friend) => {
           return (
             <div className="friend" key={friend._id}>
-              {friend.username}
+              {friend.firstName} {friend.lastName}
+              <img src={friend.profileImg} alt="profile-img" />
             </div>
           );
         })}

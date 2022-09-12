@@ -7,7 +7,7 @@ import emailLogo from "../images/icons8-circled-envelope-50.png";
 
 function Login(props) {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [wrongLogin, setWrongLogin] = useState(false);
@@ -20,7 +20,7 @@ function Login(props) {
       method: "post",
       url: "http://127.0.0.1:3000/login",
       data: {
-        username,
+        email,
         password,
       },
       withCredentials: true,
@@ -57,10 +57,10 @@ function Login(props) {
           <form onSubmit={handleLogin}>
             <input
               type="text"
-              name="username"
+              name="email"
               placeholder="Email"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
             <input

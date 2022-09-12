@@ -1,0 +1,6 @@
+.friend img{
+    width:80px;
+    height:80px;
+    overflow:hidden;
+    border-radius: 50%;
+}

@@ -82,6 +82,8 @@ function Comment(props) {
         return (
           <div className="comment" key={comment._id}>
             {comment.text}
+            {/* {comment.author} */}
+
             <button value={comment._id} onClick={handleCommentDelete}>
               x
             </button>

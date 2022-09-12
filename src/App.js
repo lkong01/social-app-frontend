@@ -27,18 +27,4 @@ function App() {
   );
 }
 
-function Layout(props) {
-  return (
-    <div>
-      <h1>Welcome to the app!</h1>
-      <nav>
-        <Link to="/login">login</Link> |<Link to="/home">Home</Link>
-      </nav>
-      <div className="content">
-        <Outlet />
-      </div>
-    </div>
-  );
-}
-
 export default App;

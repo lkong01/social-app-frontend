@@ -36,7 +36,6 @@ function Posts() {
     })
       .then(function (response) {
         console.log(response);
-        //window.location.reload();
         fetchPosts();
       })
       .catch(function (error) {
@@ -106,7 +105,8 @@ function Posts() {
       {posts.map((post) => {
         return (
           <div className="post" key={post._id}>
-            post:{post.text} username: {post.author.username}
+            post:{post.text} name: {post.author.firstName}{" "}
+            {post.author.lastName}
             date:{DateTime.fromISO(post.createdAt).toRelativeCalendar()}
             {post.image != "http://localhost:3000/images/" ? (
               <img src={post.image} alt="post-img" />

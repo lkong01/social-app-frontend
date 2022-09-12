@@ -2,16 +2,20 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Signup() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [profileImg, setProfileImg] = useState("");
 
   function onSubmit(e) {
     e.preventDefault();
 
     let formData = new FormData();
-    formData.append("username", username);
+    formData.append("email", email);
     formData.append("password", password);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
     formData.append("profileImg", profileImg);
 
     axios({
@@ -34,13 +38,30 @@ function Signup() {
         <div className="login">
           <form onSubmit={onSubmit}>
             <input
-              type="text"
-              name="username"
+              type="email"
+              name="email"
               placeholder="Email"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+
             <input
               type="password"
               name="password"
@@ -62,7 +83,7 @@ function Signup() {
                 setProfileImg(e.target.files[0]);
               }}
             />
-            <label htmlFor="avatar-input">Add a picture</label>
+            <label htmlFor="avatar-input">Add Profile Picture</label>
             <button className="login-button">Signup</button>
           </form>
         </div>

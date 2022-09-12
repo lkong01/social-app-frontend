@@ -12,7 +12,7 @@ function Home(props) {
     <div>
       <Nav></Nav>
       <div className="profile-main">
-        <UserInfo></UserInfo>
+        <UserInfo userId={"631fa6808a10a49fa166736e"}></UserInfo>
         <Posts></Posts>
       </div>
     </div>
