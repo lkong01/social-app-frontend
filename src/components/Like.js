@@ -12,7 +12,7 @@ function Like(props) {
         withCredentials: true,
       }
     );
-    console.log(res.data);
+    // console.log(res.data);
     setLikes(res.data);
   };
 
@@ -29,7 +29,7 @@ function Like(props) {
       withCredentials: true,
     })
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         fetchLikes();
       })
       .catch(function (error) {
@@ -39,7 +39,7 @@ function Like(props) {
 
   useEffect(() => {
     fetchLikes();
-    console.log(likes);
+    // console.log(likes);
   }, []);
   useEffect(() => {
     if (likes.includes("630fbed1269c22832d102c43")) {
@@ -52,7 +52,7 @@ function Like(props) {
   return (
     <div className="like">
       <button onClick={handleLike}>{like ? "unlike" : "like"}</button>
-      {}
+      {likes.length > 0 ? likes.length : ""}
     </div>
   );
 }
