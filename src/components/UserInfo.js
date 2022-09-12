@@ -28,19 +28,29 @@ function UserInfo(props) {
 
   return (
     <div className="user-info">
-      name
-      {user.firstName} {user.lastName}
-      <img src={user.profileImg} alt="profile-img" />
-      <div className="friends">
-        friends:
-        {user.friends.map((friend) => {
-          return (
-            <div className="friend" key={friend._id}>
-              {friend.firstName} {friend.lastName}
-              <img src={friend.profileImg} alt="profile-img" />
-            </div>
-          );
-        })}
+      <div className="user-name">
+        <img src={user.profileImg} alt="profile-img" />
+        <div>
+          {user.firstName} {user.lastName}
+        </div>
+      </div>
+
+      <div className="user-friends">
+        <h2>
+          Friends <span>{user.friends ? user.friends.length : ""}</span>
+        </h2>
+        <div className="user-friends-content">
+          {user.friends.map((friend) => {
+            return (
+              <div className="friend-item" key={friend._id}>
+                <img src={friend.profileImg} alt="profile-img" />
+                <div className="name">
+                  {friend.firstName} {friend.lastName}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
