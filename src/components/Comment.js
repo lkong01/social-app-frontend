@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { DateTime } from "luxon";
 import Like from "./Like";
+import CommentIcon from "./images/comment.png";
 import "../styles/Comment.css";
 
 function Comment(props) {
@@ -66,27 +68,51 @@ function Comment(props) {
 
   return (
     <div className="comments">
-      <form onSubmit={handleCommentSubmit}>
-        <input
-          type="text"
-          name="newComment"
-          id="newComment"
-          value={newComment}
-          placeholder="Write a comment"
-          //   required
-          onChange={handleCommentChange}
-        />
-        <button type="submit">Comment</button>
-      </form>
+      <div className="comment-option">
+        <Like postId={props.postId}></Like>
+        <button
+          onClick={() => {
+            document.querySelector("#newComment").focus();
+          }}
+        >
+          <img src={CommentIcon} alt="comment-icon" />
+          Comment
+        </button>
+      </div>
+
+      <div className="new-comment">
+        <form onSubmit={handleCommentSubmit}>
+          <input
+            type="text"
+            name="newComment"
+            id="newComment"
+            value={newComment}
+            placeholder="Write a comment"
+            required
+            onChange={handleCommentChange}
+          />
+          <button type="submit">Comment</button>
+        </form>
+      </div>
+
       {comments.map((comment) => {
         return (
           <div className="comment" key={comment._id}>
-            {comment.text}
-            {/* {comment.author} */}
-
-            <button value={comment._id} onClick={handleCommentDelete}>
-              x
-            </button>
+            <img src={comment.author.profileImg} alt="author-img" />
+            <div className="comment-main">
+              <div className="comment-header">
+                <div className="comment-author">
+                  {comment.author.firstName} {comment.author.lastName}
+                </div>
+                <div className="comment-date">
+                  {DateTime.fromISO(comment.createdAt).toRelativeCalendar()}
+                </div>
+                <button value={comment._id} onClick={handleCommentDelete}>
+                  x
+                </button>
+              </div>
+              <div className="comment-text">{comment.text}</div>
+            </div>
           </div>
         );
       })}

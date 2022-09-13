@@ -16,7 +16,7 @@ function UserInfo(props) {
     const res = await axios.get(`http://localhost:3000/user/${props.userId}`, {
       withCredentials: true,
     });
-    console.log(res.data.profileImg, "img address", res.data);
+    // console.log(res.data.profileImg, "img address", res.data);
     setUser(res.data);
     // setFriends(res.data.friends);
     // setProfileImg(res.data.profileImg);

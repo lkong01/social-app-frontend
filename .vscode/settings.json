@@ -4,5 +4,6 @@
     },
     "emmet.includeLanguages": {
         "javascript": "javascriptreact"
-    }
+    },
+    "css.format.enable": true
 }

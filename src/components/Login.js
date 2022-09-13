@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
-import githubLogo from "../images/icons8-github.svg";
-import emailLogo from "../images/icons8-circled-envelope-50.png";
+import githubLogo from "./images/icons8-github.svg";
+import emailLogo from "./images/icons8-circled-envelope-50.png";
 
 function Login(props) {
   const navigate = useNavigate();

@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import LikeIcon from "./images/thumb-up.png";
 
 function Like(props) {
   const [like, setLike] = useState(false);
   const [likes, setLikes] = useState([]);
+
+  const fetchLike = async () => {
+    const res = await axios.get(
+      `http://localhost:3000/post/${props.postId}/like`,
+      {
+        withCredentials: true,
+      }
+    );
+    // console.log(res.data);
+    setLike(res.data);
+  };
 
   const fetchLikes = async () => {
     const res = await axios.get(
@@ -18,7 +30,7 @@ function Like(props) {
 
   function handleLike() {
     let method = "post";
-    if (likes.includes("630fbed1269c22832d102c43")) {
+    if (like) {
       method = "delete";
     }
 
@@ -30,6 +42,7 @@ function Like(props) {
     })
       .then(function (response) {
         // console.log(response);
+        fetchLike();
         fetchLikes();
       })
       .catch(function (error) {
@@ -38,21 +51,22 @@ function Like(props) {
   }
 
   useEffect(() => {
+    fetchLike();
     fetchLikes();
     // console.log(likes);
   }, []);
-  useEffect(() => {
-    if (likes.includes("630fbed1269c22832d102c43")) {
-      setLike(true);
-    } else {
-      setLike(false);
-    }
-  }, [likes]);
 
   return (
     <div className="like">
-      <button onClick={handleLike}>{like ? "unlike" : "like"}</button>
-      {likes.length > 0 ? likes.length : ""}
+      <button onClick={handleLike}>
+        <img
+          src={LikeIcon}
+          alt="like-icon"
+          style={like ? {} : { filter: "grayscale(100%)" }}
+        />
+        <span style={like ? { color: "#1B74E4" } : {}}>Like</span> {"  "}
+        {likes.length > 0 ? likes.length : ""}
+      </button>
     </div>
   );
 }

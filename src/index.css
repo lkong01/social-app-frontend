@@ -11,6 +11,7 @@ button{
   background:none;
   border: none;
   cursor:pointer;
+  transition-duration: 0.5s;
 }
 
 a{

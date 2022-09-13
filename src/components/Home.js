@@ -9,8 +9,9 @@ import UserInfo from "./UserInfo";
 
 function Home(props) {
   return (
-    <div>
+    <div className="home">
       <Nav></Nav>
+
       <div className="profile-main">
         <UserInfo userId={"631fa6808a10a49fa166736e"}></UserInfo>
         <Posts></Posts>

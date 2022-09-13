@@ -4,8 +4,11 @@ import "../styles/Home.css";
 import Comment from "./Comment";
 import Like from "./Like";
 import { DateTime } from "luxon";
+import "../styles/Posts.css";
+import DeleteIcon from "./images/icons8-delete-64.png";
+import ImageIcon from "./images/image.png";
 
-function Posts() {
+function Posts(props) {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState("");
   const [postImage, setPostImage] = useState();
@@ -14,7 +17,7 @@ function Posts() {
     const res = await axios.get("http://localhost:3000/posts/", {
       withCredentials: true,
     });
-    console.log(res.data);
+    // console.log(res.data);
     setPosts(res.data);
     setPostImage(res.data.image);
   };
@@ -49,9 +52,9 @@ function Posts() {
   };
 
   const handlePostDelete = (e) => {
-    console.log(e.target.value);
+    console.log(e.currentTarget.value);
     axios
-      .delete("http://localhost:3000/post/" + String(e.target.value))
+      .delete("http://localhost:3000/post/" + String(e.currentTarget.value))
       .then(function (response) {
         console.log(response);
         fetchPosts();
@@ -81,46 +84,83 @@ function Posts() {
   }, []);
   return (
     <div className="posts">
-      <form onSubmit={handlePostSubmit}>
-        <textarea
-          name="newPost"
-          id="newPost"
-          cols="30"
-          rows="5"
-          value={newPost}
-          placeholder="What's happening?"
-          onChange={handlePostChange}
-          required
-        />
-        <input
-          type="file"
-          id="post-img-input"
-          onChange={(e) => {
-            setPostImage(e.target.files[0]);
-          }}
-        />
-        <label htmlFor="post-img-input">Add a picture</label>
-        <button type="submit">Post</button>
-      </form>
-      {posts.map((post) => {
-        return (
-          <div className="post" key={post._id}>
-            post:{post.text} name: {post.author.firstName}{" "}
-            {post.author.lastName}
-            date:{DateTime.fromISO(post.createdAt).toRelativeCalendar()}
-            {post.image != "http://localhost:3000/images/" ? (
-              <img src={post.image} alt="post-img" />
-            ) : (
-              ""
-            )}
-            <button value={post._id} onClick={handlePostDelete}>
-              delete
-            </button>
-            <Comment postId={post._id}></Comment>
-            <Like postId={post._id}></Like>
-          </div>
-        );
-      })}
+      <div className="new-post">
+        <form onSubmit={handlePostSubmit}>
+          <textarea
+            name="newPost"
+            id="newPost"
+            rows="3"
+            value={newPost}
+            placeholder="What's happening?"
+            onChange={handlePostChange}
+            required
+          />
+          <input
+            className="new-post-img-input"
+            type="file"
+            id="post-img-input"
+            onChange={(e) => {
+              console.log(e.target.files[0]);
+              setPostImage(e.target.files[0]);
+            }}
+          />
+          <label htmlFor="post-img-input">
+            <img src={ImageIcon} alt="" />
+            {postImage ? postImage.name : "Add a picture"}
+          </label>
+          <button type="submit">Post</button>
+        </form>
+      </div>
+
+      <div className="home-posts">
+        {posts.map((post) => {
+          return (
+            <div className="post" key={post._id}>
+              <div className="post-head">
+                <div className="post-author">
+                  <a href={`http://localhost:3000/user/${post.author._id}`}>
+                    <img src={post.author.profileImg} alt="post-author-img" />
+                  </a>
+
+                  <div className="post-author-right">
+                    <div className="post-author-name">
+                      <a href={`http://localhost:3000/user/${post.author._id}`}>
+                        {" "}
+                        {post.author.firstName} {post.author.lastName}
+                      </a>
+                    </div>
+                    <div className="post-time">
+                      Posted{" "}
+                      {DateTime.fromISO(post.createdAt).toRelativeCalendar()}
+                    </div>
+                  </div>
+                </div>
+                <button value={post._id} onClick={handlePostDelete}>
+                  <img
+                    // value={post._id}
+                    className="post-delete-img"
+                    src={DeleteIcon}
+                    alt=""
+                  />
+                  delete
+                </button>
+              </div>
+
+              <div className="post-content">
+                <div className="post-text">{post.text}</div>
+
+                {post.image != "http://localhost:3000/images/" ? (
+                  <img src={post.image} alt="post-img" />
+                ) : (
+                  ""
+                )}
+              </div>
+
+              <Comment postId={post._id}></Comment>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
