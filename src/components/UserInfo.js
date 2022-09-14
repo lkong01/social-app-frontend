@@ -18,7 +18,7 @@ function UserInfo(props) {
     });
     // console.log(res.data.profileImg, "img address", res.data);
     setUser(res.data);
-    console.log(res.data);
+    // console.log(res.data);
     // setFriends(res.data.friends);
     // setProfileImg(res.data.profileImg);
   };
@@ -26,7 +26,7 @@ function UserInfo(props) {
   useEffect(() => {
     fetchUser();
   }, []);
-  console.log(props.userId);
+
   return (
     <div className="user-info">
       <div className="user-name">

@@ -19,7 +19,7 @@ function Posts(props) {
     });
     // console.log(res.data);
     setPosts(res.data);
-    setPostImage(res.data.image);
+    // setPostImage(res.data.image);
   };
 
   const handlePostSubmit = (e) => {
@@ -39,6 +39,8 @@ function Posts(props) {
     })
       .then(function (response) {
         console.log(response);
+        setPostImage("");
+        setNewPost("");
         fetchPosts();
       })
       .catch(function (error) {
@@ -135,15 +137,20 @@ function Posts(props) {
                     </div>
                   </div>
                 </div>
-                <button value={post._id} onClick={handlePostDelete}>
-                  <img
-                    // value={post._id}
-                    className="post-delete-img"
-                    src={DeleteIcon}
-                    alt=""
-                  />
-                  delete
-                </button>
+                {JSON.parse(localStorage.getItem("user"))._id ==
+                post.author._id ? (
+                  <button value={post._id} onClick={handlePostDelete}>
+                    <img
+                      // value={post._id}
+                      className="post-delete-img"
+                      src={DeleteIcon}
+                      alt=""
+                    />
+                    delete
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
 
               <div className="post-content">

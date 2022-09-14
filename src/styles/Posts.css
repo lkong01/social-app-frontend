@@ -1,6 +1,6 @@
     
 .posts{
-    /* flex: 1 1 100%; */
+    flex: 0 1 700px;
     padding:1rem 1.5rem 0 0;
 }
 

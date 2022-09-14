@@ -34,6 +34,7 @@ function Comment(props) {
     })
       .then(function (response) {
         console.log(response);
+        setNewComment("");
         fetchComments();
       })
       .catch(function (error) {
@@ -107,9 +108,14 @@ function Comment(props) {
                 <div className="comment-date">
                   {DateTime.fromISO(comment.createdAt).toRelativeCalendar()}
                 </div>
-                <button value={comment._id} onClick={handleCommentDelete}>
-                  x
-                </button>
+                {JSON.parse(localStorage.getItem("user"))._id ===
+                comment.author._id ? (
+                  <button value={comment._id} onClick={handleCommentDelete}>
+                    x
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="comment-text">{comment.text}</div>
             </div>

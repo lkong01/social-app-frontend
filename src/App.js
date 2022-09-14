@@ -25,6 +25,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
           <Route path="/user/:id" element={<User />} />
+          <Route path="/profile" element={<User />} />
         </Routes>
       </BrowserRouter>
     </div>

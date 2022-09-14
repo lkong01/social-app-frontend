@@ -7,7 +7,7 @@ function Nav() {
       <a href="/home">reactbook</a>
       <div className="nav-main">
         <a href="/home">Home</a>
-        <a href="/home">Profile</a>
+        <a href="/profile">Profile</a>
         <a href="/friends">Friends</a>
         <a href="/home">Search</a>
         <a href="/home">Setting</a>
