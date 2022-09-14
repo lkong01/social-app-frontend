@@ -10,6 +10,8 @@ import {
 import Home from "./components/Home.js";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Friends from "./components/Friends";
+import User from "./components/User";
 import "./App.css";
 
 function App() {
@@ -19,8 +21,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/friends" element={<Friends />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/user/:id" element={<User />} />
         </Routes>
       </BrowserRouter>
     </div>

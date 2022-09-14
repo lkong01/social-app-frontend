@@ -18,6 +18,7 @@ function UserInfo(props) {
     });
     // console.log(res.data.profileImg, "img address", res.data);
     setUser(res.data);
+    console.log(res.data);
     // setFriends(res.data.friends);
     // setProfileImg(res.data.profileImg);
   };
@@ -25,7 +26,7 @@ function UserInfo(props) {
   useEffect(() => {
     fetchUser();
   }, []);
-
+  console.log(props.userId);
   return (
     <div className="user-info">
       <div className="user-name">
@@ -43,10 +44,15 @@ function UserInfo(props) {
           {user.friends.map((friend) => {
             return (
               <div className="friend-item" key={friend._id}>
-                <img src={friend.profileImg} alt="profile-img" />
-                <div className="name">
-                  {friend.firstName} {friend.lastName}
-                </div>
+                <a href={`http://localhost:3001/user/${friend._id}`}>
+                  <img src={friend.profileImg} alt="profile-img" />
+                </a>
+                <a href={`http://localhost:3001/user/${friend._id}`}>
+                  {" "}
+                  <div className="name">
+                    {friend.firstName} {friend.lastName}
+                  </div>
+                </a>
               </div>
             );
           })}

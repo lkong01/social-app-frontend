@@ -8,21 +8,28 @@ import emailLogo from "./images/icons8-circled-envelope-50.png";
 function Login(props) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [wrongLogin, setWrongLogin] = useState(false);
   const [user, setUser] = useState("");
 
   function handleLogin(e) {
-    e.preventDefault();
+    let data = {
+      username,
+      password,
+    };
+
+    if (e.target.id == "demo") {
+      data = { username: "kbird@email.com", password: "tbird" };
+    } else {
+      e.preventDefault();
+    }
 
     axios({
       method: "post",
       url: "http://127.0.0.1:3000/login",
-      data: {
-        email,
-        password,
-      },
+      data,
       withCredentials: true,
     })
       .then(function (response) {
@@ -31,9 +38,11 @@ function Login(props) {
           setWrongLogin(true);
           console.log("Incorrect username or password.");
         } else {
+          console.log(response.data);
           setUser(response.data);
-
+          localStorage.setItem("user", JSON.stringify(response.data));
           setWrongLogin(false);
+          navigate("/home");
         }
         //window.location.reload();
       })
@@ -45,6 +54,15 @@ function Login(props) {
   //   localStorage.setItem("currentUser", user.username);
 
   // }, [user]);
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
   return (
     <div className="login-page">
       <div className="login-main">
@@ -59,8 +77,8 @@ function Login(props) {
               type="text"
               name="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
             <input
@@ -73,8 +91,9 @@ function Login(props) {
             />
             <button className="login-button">Log In</button>
           </form>
-          <button className="login-button">
-            <a href="/home">Demo Account</a>{" "}
+          <button id="demo" className="login-button" onClick={handleLogin}>
+            {/* <a href="/home">Demo Account</a>{" "} */}
+            Demo Account
           </button>
           <hr />
           <button className="signup-button">

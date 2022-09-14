@@ -11,8 +11,8 @@ text-align: center;
 }
 
 .user-name img{
-    width:160px;
-    height:160px;
+    width:130px;
+    height:130px;
     overflow:hidden;
     border-radius: 50%;
 }
@@ -30,6 +30,8 @@ text-align: center;
 }
 .user-friends h2 {
 padding-left: 0.5rem;
+padding-bottom: 0.7rem;
+margin:0;
 }
 .user-friends-content{
     display:flex;
@@ -57,4 +59,8 @@ padding-left: 0.5rem;
     height:80px;
     overflow:hidden;
     border-radius: 50%;
+}
+
+.friend-item a {
+    color: black;
 }

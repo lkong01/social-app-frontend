@@ -8,12 +8,20 @@ import Posts from "./Posts";
 import UserInfo from "./UserInfo";
 
 function Home(props) {
+  // const [user, setUser] = useState({});
+
+  // useEffect(() => {
+  //   console.log(JSON.parse(localStorage.getItem("user"))._id);
+  // }, []);
+
   return (
     <div className="home">
       <Nav></Nav>
 
       <div className="profile-main">
-        <UserInfo userId={"631fa6808a10a49fa166736e"}></UserInfo>
+        <UserInfo
+          userId={JSON.parse(localStorage.getItem("user"))._id}
+        ></UserInfo>
         <Posts></Posts>
       </div>
     </div>
