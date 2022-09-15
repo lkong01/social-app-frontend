@@ -43,10 +43,10 @@ function Friends() {
           {friends.map((friend) => {
             return (
               <div className="friend-item" key={friend._id}>
-                <a href={`http://localhost:3001/user/${friend._id}`}>
+                <a href={`/user/${friend._id}`}>
                   <img src={friend.profileImg} alt="profile-img" />
                 </a>
-                <a href={`http://localhost:3001/user/${friend._id}`}>
+                <a href={`/user/${friend._id}`}>
                   {" "}
                   <div className="name">
                     {friend.firstName} {friend.lastName}

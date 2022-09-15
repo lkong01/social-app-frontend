@@ -42,13 +42,13 @@ function Search() {
         {results.map((result) => {
           return (
             <div className="result-item post-author">
-              <a href={`http://localhost:3001/user/${result._id}`}>
+              <a href={`/user/${result._id}`}>
                 <img src={result.profileImg} alt="profile-img" />
               </a>
 
               <div className="name">
                 {" "}
-                <a href={`http://localhost:3001/user/${result._id}`}>
+                <a href={`/user/${result._id}`}>
                   {" "}
                   {result.firstName} {result.lastName}
                 </a>

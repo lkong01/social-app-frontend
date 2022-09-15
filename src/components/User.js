@@ -56,7 +56,7 @@ function User(props) {
                 <div className="post" key={post._id}>
                   <div className="post-head">
                     <div className="post-author">
-                      <a href={`http://localhost:3001/user/${post.author._id}`}>
+                      <a href={`/user/${post.author._id}`}>
                         <img
                           src={post.author.profileImg}
                           alt="post-author-img"
@@ -65,9 +65,7 @@ function User(props) {
 
                       <div className="post-author-right">
                         <div className="post-author-name">
-                          <a
-                            href={`http://localhost:3001/user/${post.author._id}`}
-                          >
+                          <a href={`/user/${post.author._id}`}>
                             {" "}
                             {post.author.firstName} {post.author.lastName}
                           </a>

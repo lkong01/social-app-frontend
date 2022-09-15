@@ -120,13 +120,13 @@ function Posts(props) {
             <div className="post" key={post._id}>
               <div className="post-head">
                 <div className="post-author">
-                  <a href={`http://localhost:3001/user/${post.author._id}`}>
+                  <a href={`/user/${post.author._id}`}>
                     <img src={post.author.profileImg} alt="post-author-img" />
                   </a>
 
                   <div className="post-author-right">
                     <div className="post-author-name">
-                      <a href={`http://localhost:3001/user/${post.author._id}`}>
+                      <a href={`/user/${post.author._id}`}>
                         {" "}
                         {post.author.firstName} {post.author.lastName}
                       </a>
@@ -155,12 +155,7 @@ function Posts(props) {
 
               <div className="post-content">
                 <div className="post-text">{post.text}</div>
-
-                {post.image != "http://localhost:3000/images/" ? (
-                  <img src={post.image} alt="post-img" />
-                ) : (
-                  ""
-                )}
+                {post.image ? <img src={post.image} alt="post-img" /> : ""}
               </div>
 
               <Comment postId={post._id}></Comment>
