@@ -10,12 +10,9 @@ function Comment(props) {
   const [newComment, setNewComment] = useState("");
 
   const fetchComments = async () => {
-    const res = await axios.get(
-      `http://localhost:3000/post/${props.postId}/comments`,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await axios.get(`/api/post/${props.postId}/comments`, {
+      withCredentials: true,
+    });
     //console.log(res.data.comments);
     setComments(res.data.comments);
   };
@@ -25,7 +22,7 @@ function Comment(props) {
 
     axios({
       method: "post",
-      url: `http://localhost:3000/post/${props.postId}/comment`,
+      url: `/api/post/${props.postId}/comment`,
       data: {
         text: newComment,
         post: props.postId,
@@ -50,10 +47,7 @@ function Comment(props) {
   const handleCommentDelete = (e) => {
     console.log(e.target.value);
     axios
-      .delete(
-        `http://localhost:3000/post/${props.postId}/comment/` +
-          String(e.target.value)
-      )
+      .delete(`/api/post/${props.postId}/comment/` + String(e.target.value))
       .then(function (response) {
         console.log(response);
         fetchComments();

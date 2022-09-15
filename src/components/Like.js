@@ -7,23 +7,17 @@ function Like(props) {
   const [likes, setLikes] = useState([]);
 
   const fetchLike = async () => {
-    const res = await axios.get(
-      `http://localhost:3000/post/${props.postId}/like`,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await axios.get(`/api/post/${props.postId}/like`, {
+      withCredentials: true,
+    });
     // console.log(res.data);
     setLike(res.data);
   };
 
   const fetchLikes = async () => {
-    const res = await axios.get(
-      `http://localhost:3000/post/${props.postId}/likes`,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await axios.get(`/api/post/${props.postId}/likes`, {
+      withCredentials: true,
+    });
     // console.log(res.data);
     setLikes(res.data);
   };
@@ -36,7 +30,7 @@ function Like(props) {
 
     axios({
       method,
-      url: `http://localhost:3000/post/${props.postId}/like`,
+      url: `/api/post/${props.postId}/like`,
       data: {},
       withCredentials: true,
     })

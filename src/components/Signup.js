@@ -20,7 +20,7 @@ function Signup() {
 
     axios({
       method: "post",
-      url: "http://127.0.0.1:3000/signup",
+      url: "/api/signup",
       data: formData,
       withCredentials: true,
     })

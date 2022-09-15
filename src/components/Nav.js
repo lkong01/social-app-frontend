@@ -1,19 +1,23 @@
 import axios from "axios";
 import "../styles/Home.css";
+import HomeIcon from "./images/icons8-home.svg";
+import "../styles/Nav.css";
 
 function Nav() {
   return (
     <nav>
       <a href="/home">reactbook</a>
       <div className="nav-main">
-        <a href="/home">Home</a>
+        <a href="/home">
+          <img className="home-icon" src={HomeIcon} alt="home-icon" /> Home
+        </a>
         <a href="/profile">Profile</a>
         <a href="/friends">Friends</a>
-        <a href="/home">Search</a>
-        <a href="/home">Setting</a>
+        <a href="/search">Search</a>
+        {/* <a href="/home">Setting</a> */}
         <button
           onClick={() =>
-            axios.get("http://localhost:3000" + "/logout").then((res) => {
+            axios.get("/api/logout").then((res) => {
               console.log(res.data);
               localStorage.clear();
               window.location.href = "/login";

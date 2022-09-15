@@ -23,7 +23,7 @@ function User(props) {
   const handlePostDelete = (e) => {
     console.log(e.currentTarget.value);
     axios
-      .delete("http://localhost:3000/post/" + String(e.currentTarget.value))
+      .delete("/api/post/" + String(e.currentTarget.value))
       .then(function (response) {
         console.log(response);
         fetchUserPosts();
@@ -34,7 +34,7 @@ function User(props) {
   };
 
   const fetchUserPosts = async () => {
-    const res = await axios.get(`http://localhost:3000/user/${id}/posts`, {
+    const res = await axios.get(`/api/user/${id}/posts`, {
       withCredentials: true,
     });
     console.log(res.data);

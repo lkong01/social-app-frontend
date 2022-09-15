@@ -28,7 +28,7 @@ function Login(props) {
 
     axios({
       method: "post",
-      url: "http://127.0.0.1:3000/login",
+      url: "/api/login",
       data,
       withCredentials: true,
     })

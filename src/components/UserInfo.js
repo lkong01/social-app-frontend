@@ -13,7 +13,7 @@ function UserInfo(props) {
   const [profileImg, setProfileImg] = useState();
 
   const fetchUser = async () => {
-    const res = await axios.get(`http://localhost:3000/user/${props.userId}`, {
+    const res = await axios.get(`/api/user/${props.userId}`, {
       withCredentials: true,
     });
     // console.log(res.data.profileImg, "img address", res.data);

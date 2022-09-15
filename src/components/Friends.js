@@ -16,12 +16,9 @@ function Friends() {
       return;
     }
 
-    const res = await axios.get(
-      `http://localhost:3000/user/${loggedInUser._id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await axios.get(`/api/user/${loggedInUser._id}`, {
+      withCredentials: true,
+    });
     console.log(res.data);
     setFriends(res.data.friends);
   };
