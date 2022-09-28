@@ -78,25 +78,26 @@ function User(props) {
                         </div>
                       </div>
                     </div>
-                    <button value={post._id} onClick={handlePostDelete}>
-                      <img
-                        // value={post._id}
-                        className="post-delete-img"
-                        src={DeleteIcon}
-                        alt=""
-                      />
-                      delete
-                    </button>
+                    {JSON.parse(localStorage.getItem("user"))._id ==
+                    post.author._id ? (
+                      <button value={post._id} onClick={handlePostDelete}>
+                        <img
+                          // value={post._id}
+                          className="post-delete-img"
+                          src={DeleteIcon}
+                          alt=""
+                        />
+                        delete
+                      </button>
+                    ) : (
+                      ""
+                    )}
                   </div>
 
                   <div className="post-content">
                     <div className="post-text">{post.text}</div>
 
-                    {post.image != "http://localhost:3000/images/" ? (
-                      <img src={post.image} alt="post-img" />
-                    ) : (
-                      ""
-                    )}
+                    {post.image ? <img src={post.image} alt="post-img" /> : ""}
                   </div>
 
                   <Comment postId={post._id}></Comment>

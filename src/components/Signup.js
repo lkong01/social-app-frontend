@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Signup() {
@@ -7,6 +8,8 @@ function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [profileImg, setProfileImg] = useState("");
+
+  const navigate = useNavigate();
 
   function onSubmit(e) {
     e.preventDefault();
@@ -26,6 +29,7 @@ function Signup() {
     })
       .then(function (response) {
         console.log(response.data);
+        navigate("/");
       })
       .catch(function (error) {
         console.log(error);

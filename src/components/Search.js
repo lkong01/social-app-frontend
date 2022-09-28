@@ -8,7 +8,7 @@ function Search() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    const res = await axios.get(`/api/search/${keyword}`, {
+    const res = await axios.get(`/api/user/search/${keyword}`, {
       withCredentials: true,
     });
     console.log(res.data);
